@@ -1,0 +1,31 @@
+# Virtual environments
+tf-env/
+.venv/
+venv/
+env/
+
+# Python bytecode
+__pycache__/
+*.py[cod]
+*$py.class
+
+# Jupyter Notebook checkpoints
+.ipynb_checkpoints/
+
+# IDE files
+.idea/
+.vscode/
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# Data files (if you don't want to track large data)
+# data/*.csv
+
+# Model files (if you don't want to track large models)
+# model/*.keras
+# model/*.pkl
+
+# Logs
+*.log
