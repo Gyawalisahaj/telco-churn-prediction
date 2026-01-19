@@ -170,7 +170,7 @@ with col1:
 with col2:
     st.metric("Features", "17")
 with col3:
-    st.metric("Accuracy", "~92%")
+    st.metric("Accuracy", "80%")
 
 # ==================== Main Navigation ====================
 st.sidebar.markdown("## 🔧 Navigation")
@@ -513,7 +513,7 @@ st.markdown("""
 - Trained on Localized Nepalese telecom customer data
 - Real-time batch processing capabilities
 - Professional analytics dashboard
-- Accuracy score of ~80%
+- **Accuracy score: 80%**
 
 📞 **For more information:** sahajgnawali@gmail.com
 """)
