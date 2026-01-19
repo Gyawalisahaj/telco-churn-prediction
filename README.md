@@ -6,6 +6,12 @@ Predicting customer churn for the telecom sector using **XGBoost** and **Artific
 
 This project leverages machine learning to predict customer churn in the telecom industry, helping businesses identify at-risk customers and take proactive retention measures. The solution includes data analysis, model training, and interactive visualizations.
 
+## 🚀 Live Demo
+
+**Try the application now**: [https://telco-churn-prediction-hq2y2n5cf5prntakqy97er.streamlit.app/](https://telco-churn-prediction-hq2y2n5cf5prntakqy97er.streamlit.app/)
+
+The app is live and ready to use! Make predictions, view analytics, and explore customer churn patterns in real-time.
+
 ## Project Structure
 
 ```
