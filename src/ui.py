@@ -10,15 +10,24 @@ import plotly.graph_objects as go
 import plotly.express as px
 from datetime import datetime
 import json
+import sys
 from pathlib import Path
 
-# Import from local modules
+# Handle imports for different deployment environments
 try:
+    # Try absolute imports (for local/Docker)
     from src.model_service import ChurnModelService
     from src.predmodel import CustomerData
 except ImportError:
-    from model_service import ChurnModelService
-    from predmodel import CustomerData
+    try:
+        # Try relative imports (for Streamlit Cloud with src in path)
+        from model_service import ChurnModelService
+        from predmodel import CustomerData
+    except ImportError:
+        # Add current directory to path and try again
+        sys.path.insert(0, str(Path(__file__).parent))
+        from model_service import ChurnModelService
+        from predmodel import CustomerData
 
 # ==================== Page Configuration ====================
 st.set_page_config(

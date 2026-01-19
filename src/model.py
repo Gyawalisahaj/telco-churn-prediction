@@ -4,17 +4,27 @@ Production-ready API with comprehensive error handling and logging
 """
 
 import logging
+import sys
+from pathlib import Path
 from fastapi import FastAPI, HTTPException, Depends
 from fastapi.middleware.cors import CORSMiddleware
 from fastapi.responses import JSONResponse
 from contextlib import asynccontextmanager
 
 try:
+    # Try absolute imports (for local/Docker)
     from src.predmodel import CustomerData, PredictionResponse, HealthResponse
     from src.model_service import ChurnModelService
 except ImportError:
-    from predmodel import CustomerData, PredictionResponse, HealthResponse
-    from model_service import ChurnModelService
+    try:
+        # Try relative imports
+        from predmodel import CustomerData, PredictionResponse, HealthResponse
+        from model_service import ChurnModelService
+    except ImportError:
+        # Add current directory to path and try again
+        sys.path.insert(0, str(Path(__file__).parent))
+        from predmodel import CustomerData, PredictionResponse, HealthResponse
+        from model_service import ChurnModelService
 
 # Configure logging
 logging.basicConfig(
