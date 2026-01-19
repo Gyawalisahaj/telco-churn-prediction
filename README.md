@@ -168,14 +168,3 @@ Models are evaluated using:
 
 Geographic analysis and advanced visualizations available in the Power BI dashboard using Nepal's state topology and GeoJSON files.
 
-## Project Contributors
-
-Built for telecom customer analytics and retention optimization.
-
-## License
-
-This project is open source and available under appropriate licensing.
-
-## Contact & Support
-
-For questions or support, please reach out to the project team.
