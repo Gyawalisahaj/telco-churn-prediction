@@ -13,8 +13,12 @@ import json
 from pathlib import Path
 
 # Import from local modules
-from src.model_service import ChurnModelService
-from src.predmodel import CustomerData
+try:
+    from src.model_service import ChurnModelService
+    from src.predmodel import CustomerData
+except ImportError:
+    from model_service import ChurnModelService
+    from predmodel import CustomerData
 
 # ==================== Page Configuration ====================
 st.set_page_config(

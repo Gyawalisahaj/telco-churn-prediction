@@ -9,8 +9,12 @@ from fastapi.middleware.cors import CORSMiddleware
 from fastapi.responses import JSONResponse
 from contextlib import asynccontextmanager
 
-from src.predmodel import CustomerData, PredictionResponse, HealthResponse
-from src.model_service import ChurnModelService
+try:
+    from src.predmodel import CustomerData, PredictionResponse, HealthResponse
+    from src.model_service import ChurnModelService
+except ImportError:
+    from predmodel import CustomerData, PredictionResponse, HealthResponse
+    from model_service import ChurnModelService
 
 # Configure logging
 logging.basicConfig(
