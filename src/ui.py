@@ -88,7 +88,7 @@ if "model_service" not in st.session_state:
     try:
         st.session_state.model_service = ChurnModelService()
     except Exception as e:
-        st.error(f"❌ Failed to initialize model service: {str(e)}")
+        st.error(f"Failed to initialize model service : {str(e)}")
         st.stop()
 
 model_service = st.session_state.model_service
@@ -157,7 +157,7 @@ def export_predictions():
 
 # ==================== Header Section ====================
 st.markdown("""
-# 🇳🇵 Nepal Telco Churn Prediction System
+#  Nepal Telco Churn Prediction System
 ### Advanced ML-Based Customer Retention Analytics
 ---
 """)
@@ -176,7 +176,7 @@ with col3:
 st.sidebar.markdown("## 🔧 Navigation")
 page = st.sidebar.radio(
     "Select Mode",
-    ["Single Prediction", "Batch Prediction", "Analytics Dashboard", "Prediction History"]
+    ["Single Prediction", "Batch Prediction"]
 )
 
 # ==================== PAGE 1: Single Prediction ====================
@@ -189,7 +189,7 @@ if page == "Single Prediction":
     
     with col1:
         st.subheader("👤 Demographics")
-        name = st.text_input("Customer Name", placeholder="e.g., Ram Kumar")
+        name = st.text_input("Customer Name", placeholder="e.g., Sahaj Gyawali")
         gender = st.selectbox("Gender", ["Male", "Female"])
         age = st.number_input("Age", min_value=18, max_value=100, value=35)
         num_dependents = st.number_input("Number of Dependents", min_value=0, max_value=10, value=2)
@@ -197,7 +197,7 @@ if page == "Single Prediction":
         st.subheader("💰 Financial")
         estimated_salary = st.number_input(
             "Estimated Monthly Salary (NPR)",
-            min_value=0, value=50000, step=5000
+            min_value=0, value=100000, step=5000
         )
     
     with col2:
