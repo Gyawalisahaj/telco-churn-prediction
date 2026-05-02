@@ -400,108 +400,108 @@ elif page == "Batch Prediction":
         except Exception as e:
             st.error(f"❌ Error reading file: {str(e)}")
 
-# ==================== PAGE 3: Analytics Dashboard ====================
-elif page == "Analytics Dashboard":
-    st.markdown("### 📊 Analytics Dashboard")
+# # ==================== PAGE 3: Analytics Dashboard ====================
+# elif page == "Analytics Dashboard":
+#     st.markdown("### 📊 Analytics Dashboard")
     
-    if st.session_state.predictions_history:
-        history_df = pd.DataFrame(st.session_state.predictions_history)
+#     if st.session_state.predictions_history:
+#         history_df = pd.DataFrame(st.session_state.predictions_history)
         
-        # Key Metrics
-        col1, col2, col3, col4 = st.columns(4)
-        with col1:
-            st.metric("Total Predictions", len(history_df))
-        with col2:
-            churn_rate = (history_df["churn_prediction"] == "CHURN").sum() / len(history_df) * 100
-            st.metric("Churn Rate", f"{churn_rate:.1f}%")
-        with col3:
-            avg_risk = history_df["churn_probability"].mean()
-            st.metric("Avg Risk", f"{avg_risk:.1f}%")
-        with col4:
-            high_risk_count = (history_df["risk_level"] == "HIGH").sum()
-            st.metric("High Risk Count", high_risk_count)
+#         # Key Metrics
+#         col1, col2, col3, col4 = st.columns(4)
+#         with col1:
+#             st.metric("Total Predictions", len(history_df))
+#         with col2:
+#             churn_rate = (history_df["churn_prediction"] == "CHURN").sum() / len(history_df) * 100
+#             st.metric("Churn Rate", f"{churn_rate:.1f}%")
+#         with col3:
+#             avg_risk = history_df["churn_probability"].mean()
+#             st.metric("Avg Risk", f"{avg_risk:.1f}%")
+#         with col4:
+#             high_risk_count = (history_df["risk_level"] == "HIGH").sum()
+#             st.metric("High Risk Count", high_risk_count)
         
-        st.divider()
+#         st.divider()
         
-        # Charts
-        col1, col2 = st.columns(2)
+#         # Charts
+#         col1, col2 = st.columns(2)
         
-        with col1:
-            # Risk Distribution
-            risk_counts = history_df["risk_level"].value_counts()
-            fig_risk = px.pie(
-                values=risk_counts.values, labels=risk_counts.index,
-                title="Risk Level Distribution",
-                color_discrete_map={"LOW": "#30cfd0", "MEDIUM": "#fa709a", "HIGH": "#f5576c"}
-            )
-            st.plotly_chart(fig_risk, use_container_width=True)
+#         with col1:
+#             # Risk Distribution
+#             risk_counts = history_df["risk_level"].value_counts()
+#             fig_risk = px.pie(
+#                 values=risk_counts.values, labels=risk_counts.index,
+#                 title="Risk Level Distribution",
+#                 color_discrete_map={"LOW": "#30cfd0", "MEDIUM": "#fa709a", "HIGH": "#f5576c"}
+#             )
+#             st.plotly_chart(fig_risk, use_container_width=True)
         
-        with col2:
-            # Churn Prediction Distribution
-            churn_counts = history_df["churn_prediction"].value_counts()
-            fig_churn = px.bar(
-                x=churn_counts.index, y=churn_counts.values,
-                title="Churn Prediction Distribution",
-                labels={"x": "Prediction", "y": "Count"}
-            )
-            st.plotly_chart(fig_churn, use_container_width=True)
+#         with col2:
+#             # Churn Prediction Distribution
+#             churn_counts = history_df["churn_prediction"].value_counts()
+#             fig_churn = px.bar(
+#                 x=churn_counts.index, y=churn_counts.values,
+#                 title="Churn Prediction Distribution",
+#                 labels={"x": "Prediction", "y": "Count"}
+#             )
+#             st.plotly_chart(fig_churn, use_container_width=True)
         
-        # Probability Distribution
-        fig_prob = px.histogram(
-            history_df, x="churn_probability",
-            nbins=20, title="Churn Probability Distribution",
-            labels={"churn_probability": "Churn Probability (%)"}
-        )
-        st.plotly_chart(fig_prob, use_container_width=True)
+#         # Probability Distribution
+#         fig_prob = px.histogram(
+#             history_df, x="churn_probability",
+#             nbins=20, title="Churn Probability Distribution",
+#             labels={"churn_probability": "Churn Probability (%)"}
+#         )
+#         st.plotly_chart(fig_prob, use_container_width=True)
         
-    else:
-        st.info("📊 No predictions yet. Make some predictions to see analytics!")
+#     else:
+#         st.info("📊 No predictions yet. Make some predictions to see analytics!")
 
-# ==================== PAGE 4: Prediction History ====================
-elif page == "Prediction History":
-    st.markdown("### 📜 Prediction History")
+# # ==================== PAGE 4: Prediction History ====================
+# elif page == "Prediction History":
+#     st.markdown("### 📜 Prediction History")
     
-    if st.session_state.predictions_history:
-        history_df = pd.DataFrame(st.session_state.predictions_history)
+#     if st.session_state.predictions_history:
+#         history_df = pd.DataFrame(st.session_state.predictions_history)
         
-        # Filters
-        col1, col2 = st.columns(2)
-        with col1:
-            risk_filter = st.multiselect(
-                "Filter by Risk Level",
-                ["LOW", "MEDIUM", "HIGH"],
-                default=["LOW", "MEDIUM", "HIGH"]
-            )
-        with col2:
-            churn_filter = st.multiselect(
-                "Filter by Prediction",
-                ["CHURN", "RETAIN"],
-                default=["CHURN", "RETAIN"]
-            )
+#         # Filters
+#         col1, col2 = st.columns(2)
+#         with col1:
+#             risk_filter = st.multiselect(
+#                 "Filter by Risk Level",
+#                 ["LOW", "MEDIUM", "HIGH"],
+#                 default=["LOW", "MEDIUM", "HIGH"]
+#             )
+#         with col2:
+#             churn_filter = st.multiselect(
+#                 "Filter by Prediction",
+#                 ["CHURN", "RETAIN"],
+#                 default=["CHURN", "RETAIN"]
+#             )
         
-        filtered_df = history_df[
-            (history_df["risk_level"].isin(risk_filter)) &
-            (history_df["churn_prediction"].isin(churn_filter))
-        ]
+#         filtered_df = history_df[
+#             (history_df["risk_level"].isin(risk_filter)) &
+#             (history_df["churn_prediction"].isin(churn_filter))
+#         ]
         
-        st.dataframe(filtered_df, use_container_width=True)
+#         st.dataframe(filtered_df, use_container_width=True)
         
-        # Export
-        csv_data = filtered_df.to_csv(index=False).encode('utf-8')
-        st.download_button(
-            label="📥 Download History",
-            data=csv_data,
-            file_name=f"prediction_history_{datetime.now().strftime('%Y%m%d_%H%M%S')}.csv",
-            mime="text/csv",
-            use_container_width=True
-        )
+#         # Export
+#         csv_data = filtered_df.to_csv(index=False).encode('utf-8')
+#         st.download_button(
+#             label="📥 Download History",
+#             data=csv_data,
+#             file_name=f"prediction_history_{datetime.now().strftime('%Y%m%d_%H%M%S')}.csv",
+#             mime="text/csv",
+#             use_container_width=True
+#         )
         
-        # Clear History
-        if st.button("🗑️ Clear History", type="secondary", use_container_width=True):
-            st.session_state.predictions_history = []
-            st.rerun()
-    else:
-        st.info("📜 No prediction history yet.")
+#         # Clear History
+#         if st.button("🗑️ Clear History", type="secondary", use_container_width=True):
+#             st.session_state.predictions_history = []
+#             st.rerun()
+#     else:
+#         st.info("📜 No prediction history yet.")
 
 # ==================== Footer ====================
 st.divider()
@@ -512,7 +512,6 @@ st.markdown("""
 - Powered by Deep Learning (Artificial Neural Network)
 - Trained on Localized Nepalese telecom customer data
 - Real-time batch processing capabilities
-- Professional analytics dashboard
 - **Accuracy score: 80%**
 
 📞 **For more information:** sahajgnawali@gmail.com
